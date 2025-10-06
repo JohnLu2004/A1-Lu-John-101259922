@@ -49,15 +49,15 @@ public class LibrarySystem {
         newBook = new Book("A Christmas Carol", "Charles Dickens");
         books.add(newBook);
 
-        Borrower newBorrower = new Borrower();
+        Borrower newBorrower = new Borrower("Stephen King");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower();
+         newBorrower = new Borrower("Charles Darwin");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower();
+         newBorrower = new Borrower("William Shakespeare");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower();
+         newBorrower = new Borrower("Julius Caesar");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower();
+         newBorrower = new Borrower("Charles Dickens");
         borrowers.add(newBorrower);
     }
 
@@ -74,6 +74,6 @@ public class LibrarySystem {
     }
 
     public Borrower getBorrower(int index){
-        return new Borrower();
+        return borrowers.get(index);
     }
 }
