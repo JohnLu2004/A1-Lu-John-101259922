@@ -49,7 +49,7 @@ public class LibrarySystem {
     }
 
     public Book getBook(int index){
-        return new Book("Title", "Author");
+        return books.get(index);
     }
 
     public int getNumBooks() {

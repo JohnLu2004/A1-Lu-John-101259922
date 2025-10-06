@@ -31,10 +31,10 @@ public class MainTest {
 
         Book tenthBook = librarySystem.getBook(9);
         assertEquals("Journey to the West", tenthBook.title);
-        assertEquals("Wu Cheng En", firstBook.author);
+        assertEquals("Wu Cheng En", tenthBook.author);
 
         Book twentiethBook = librarySystem.getBook(19);
         assertEquals("A Christmas Carol", twentiethBook.title);
-        assertEquals("Charles Dickens", firstBook.author);
+        assertEquals("Charles Dickens", twentiethBook.author);
     }
 }
