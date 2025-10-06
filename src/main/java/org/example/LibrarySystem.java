@@ -72,4 +72,8 @@ public class LibrarySystem {
     public int getNumBorrowers(){
         return borrowers.size();
     }
+
+    public Borrower getBorrower(int index){
+        return new Borrower();
+    }
 }

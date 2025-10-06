@@ -49,4 +49,21 @@ public class MainTest {
 
         assertEquals(5, numBorrowers);
     }
+
+    @Test
+    @DisplayName("Borrowers have info")
+    void RESP_02_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        Borrower firstBorrower = librarySystem.getBorrower(0);
+        assertEquals(firstBorrower.name, "Stephen King");
+
+        Borrower thirdBorrower = librarySystem.getBorrower(2);
+        assertEquals(thirdBorrower.name, "William Shakespeare");
+
+        Borrower fifthBorrower = librarySystem.getBorrower(4);
+        assertEquals(fifthBorrower.name, "Charles Dickens");
+    }
 }
