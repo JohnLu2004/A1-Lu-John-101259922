@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class LibrarySystem {
@@ -54,5 +55,9 @@ public class LibrarySystem {
 
     public int getNumBooks() {
         return books.size();
+    }
+
+    public int getNumBorrowers(){
+        return 0;
     }
 }

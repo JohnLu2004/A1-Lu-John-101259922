@@ -3,7 +3,7 @@ package org.example;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
     @Test
@@ -36,5 +36,17 @@ public class MainTest {
         Book twentiethBook = librarySystem.getBook(19);
         assertEquals("A Christmas Carol", twentiethBook.title);
         assertEquals("Charles Dickens", twentiethBook.author);
+    }
+
+    @Test
+    @DisplayName("Initial amount borrowers is 5")
+    void RESP_02_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        int numBorrowers = librarySystem.getNumBorrowers();
+
+        assertEquals(5, numBorrowers);
     }
 }
