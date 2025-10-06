@@ -76,4 +76,8 @@ public class LibrarySystem {
     public Borrower getBorrower(int index){
         return borrowers.get(index);
     }
+
+    public boolean authenticate(String password){
+        return false;
+    }
 }

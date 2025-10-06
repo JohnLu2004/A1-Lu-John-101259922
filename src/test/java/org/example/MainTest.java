@@ -66,4 +66,24 @@ public class MainTest {
         Borrower fifthBorrower = librarySystem.getBorrower(4);
         assertEquals(fifthBorrower.name, "Charles Dickens");
     }
+
+    @Test
+    @DisplayName("Authenticate valid user")
+    void RESP_03_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        assertTrue(librarySystem.authenticate("Pogchamp1234!"));
+    }
+
+    @Test
+    @DisplayName("Authenticate invalid user")
+    void RESP_03_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        assertFalse(librarySystem.authenticate("$UncoolDude$"));
+    }
 }
