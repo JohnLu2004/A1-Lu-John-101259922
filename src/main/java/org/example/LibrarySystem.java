@@ -48,6 +48,10 @@ public class LibrarySystem {
         books.add(newBook);
     }
 
+    public Book getBook(int index){
+        return new Book("Title", "Author");
+    }
+
     public int getNumBooks() {
         return books.size();
     }
