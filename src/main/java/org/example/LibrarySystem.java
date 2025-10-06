@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class LibrarySystem {
     ArrayList<Book> books = new ArrayList<Book>();
+    ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
 
     public void initializeLibrary() {
         Book newBook = new Book("Don Quixote", "Miguel de Cervantes");
@@ -47,6 +48,17 @@ public class LibrarySystem {
         books.add(newBook);
         newBook = new Book("A Christmas Carol", "Charles Dickens");
         books.add(newBook);
+
+        Borrower newBorrower = new Borrower();
+        borrowers.add(newBorrower);
+         newBorrower = new Borrower();
+        borrowers.add(newBorrower);
+         newBorrower = new Borrower();
+        borrowers.add(newBorrower);
+         newBorrower = new Borrower();
+        borrowers.add(newBorrower);
+         newBorrower = new Borrower();
+        borrowers.add(newBorrower);
     }
 
     public Book getBook(int index){
@@ -58,6 +70,6 @@ public class LibrarySystem {
     }
 
     public int getNumBorrowers(){
-        return 0;
+        return borrowers.size();
     }
 }
