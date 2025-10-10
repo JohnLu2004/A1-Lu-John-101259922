@@ -421,6 +421,51 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("Returns a transaction with the correct information")
+    void RESP_13_test_01() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.createTransaction();
+
+        Transaction transaction = librarySystem.getConfirmation();
+
+        Book book = librarySystem.getBook(0);
+        Borrower borrower = librarySystem.getBorrower(0);
+        String dueDate = librarySystem.createDueDate();
+
+        assertEquals(transaction, new Transaction(borrower, book, dueDate));
+    }
+
+    @Test
+    @DisplayName("Returns previous transaction if borrowed but doesn't create transaction record")
+    void RESP_13_test_02() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.createTransaction();
+
+        librarySystem.selectBook(1);
+        librarySystem.borrow();
+
+        Transaction transaction = librarySystem.getConfirmation();
+
+        Book book = librarySystem.getBook(0);
+        Borrower borrower = librarySystem.getBorrower(0);
+        String dueDate = librarySystem.createDueDate();
+
+        assertEquals(transaction, new Transaction(borrower, book, dueDate));
+    }
+
+    @Test
     @DisplayName("System clears book of borrower and borrower us book when returned")
     void RESP_16_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();

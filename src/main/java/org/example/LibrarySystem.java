@@ -143,4 +143,8 @@ public class LibrarySystem {
         currentBook.returned();
         currentUser.returnBook(currentBook);
     }
+
+    public Transaction getConfirmation(){
+        return new Transaction(null, null, null);
+    }
 }
