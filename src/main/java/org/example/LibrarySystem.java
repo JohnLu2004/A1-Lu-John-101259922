@@ -119,6 +119,6 @@ public class LibrarySystem {
     }
 
     public boolean userIsEligible(){
-        return false;
+        return currentUser.queue.size()<3;
     }
 }

@@ -22,5 +22,7 @@ public class Borrower {
 
     public int getNumHolds(){return queue.size();}
 
-    public void borrowBook(Book book) {}
+    public void borrowBook(Book book) {
+        queue.add(book);
+    }
 }
