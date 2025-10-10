@@ -3,7 +3,6 @@ package org.example;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MainTest {
     @Test
     @DisplayName("Initial Size of the library catalogue is 20")
-    void RESP_01_test_01(){
+    void RESP_01_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -25,7 +24,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Test the contents of the library")
-    void RESP_01_test_02(){
+    void RESP_01_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -45,7 +44,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Initial amount borrowers is 5")
-    void RESP_02_test_01(){
+    void RESP_02_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -57,7 +56,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Borrowers have info")
-    void RESP_02_test_02(){
+    void RESP_02_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -74,7 +73,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Authenticate valid user")
-    void RESP_03_test_01(){
+    void RESP_03_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -84,7 +83,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Authenticate invalid user")
-    void RESP_03_test_02(){
+    void RESP_03_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -94,7 +93,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Check if authenticated user was set as current user")
-    void RESP_04_test_01(){
+    void RESP_04_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -106,7 +105,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Check if unauthenticated user was set as current user")
-    void RESP_04_test_02(){
+    void RESP_04_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -118,7 +117,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Check if user not logged in is logged in")
-    void RESP_04_test_03(){
+    void RESP_04_test_03() {
         LibrarySystem librarySystem = new LibrarySystem();
 
         librarySystem.initializeLibrary();
@@ -128,7 +127,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System calculates which on-hold books are available to user")
-    void RESP_05_test_01(){
+    void RESP_05_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -148,7 +147,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Valid user, holds placed, but none of the books available")
-    void RESP_05_test_02(){
+    void RESP_05_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -170,7 +169,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Valid user, no holds placed")
-    void RESP_05_test_03(){
+    void RESP_05_test_03() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -183,7 +182,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Verification of system selection of book")
-    void RESP_07_test_01(){
+    void RESP_07_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -194,7 +193,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Verification of system selection of book out of bounds")
-    void RESP_07_test_02(){
+    void RESP_07_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -205,7 +204,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Verification of system selection of no book")
-    void RESP_07_test_03(){
+    void RESP_07_test_03() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -214,7 +213,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System verification of book with no holds not taken: AVAILABLE")
-    void RESP_08_test_01(){
+    void RESP_08_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -225,7 +224,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System verification of book with no holds but taken: UNAVAILABLE")
-    void RESP_08_test_02(){
+    void RESP_08_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -239,7 +238,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System verification of book with holds but not taken: ON_HOLD")
-    void RESP_08_test_03(){
+    void RESP_08_test_03() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -254,7 +253,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System verification of book with hold and taken: UNAVAILABLE")
-    void RESP_08_test_04(){
+    void RESP_08_test_04() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -272,11 +271,9 @@ public class MainTest {
         assertEquals(Status.UNAVAILABLE, librarySystem.bookIsAvailable());
     }
 
-
-
     @Test
     @DisplayName("System verification of user eligibility when user has 0s book taken")
-    void RESP_09_test_01(){
+    void RESP_09_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -287,11 +284,11 @@ public class MainTest {
 
     @Test
     @DisplayName("System verification of user eligibility when user has 3 books taken")
-    void RESP_09_test_2(){
+    void RESP_09_test_2() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
-        //add 3 books
+        // add 3 books
         Borrower borrower = librarySystem.getBorrower(0);
         Book book1 = librarySystem.getBook(0);
         Book book2 = librarySystem.getBook(1);
@@ -307,7 +304,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System creates a due date that is 14 days later")
-    void RESP_10_test_01(){
+    void RESP_10_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -322,7 +319,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System creates a due date that is not before 14 days later")
-    void RESP_10_test_02(){
+    void RESP_10_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -337,7 +334,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System creates a due date that is not after 14 days later")
-    void RESP_10_test_03(){
+    void RESP_10_test_03() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -352,7 +349,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System borrowing transaction creation")
-    void RESP_11_test_01(){
+    void RESP_11_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -374,7 +371,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System borrowing transaction creation with book not borrowed")
-    void RESP_11_test_02(){
+    void RESP_11_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -388,7 +385,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System borrowing transaction creation")
-    void RESP_12_test_01(){
+    void RESP_12_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -397,21 +394,21 @@ public class MainTest {
         librarySystem.selectBook(0);
         assertTrue(librarySystem.borrow());
 
-        //book's status would be set to unavailable
+        // book's status would be set to unavailable
         Book book = librarySystem.getBook(0);
         Borrower borrower = librarySystem.getBorrower(0);
 
-        //should say unavailable after borrowing
+        // should say unavailable after borrowing
         assertEquals(Status.UNAVAILABLE, librarySystem.bookIsAvailable());
-        //user would show that they borrowed this book
+        // user would show that they borrowed this book
         assertTrue(borrower.hasBorrowed(book));
-        //book would show borrowed by user
+        // book would show borrowed by user
         assertTrue(book.borrowedBy(borrower));
     }
 
     @Test
     @DisplayName("System borrowing transaction creation when no book selected")
-    void RESP_12_test_02(){
+    void RESP_12_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -504,7 +501,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System clears book of borrower and borrower us book when returned")
-    void RESP_16_test_01(){
+    void RESP_16_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -524,7 +521,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Book not returned when no valid option selected")
-    void RESP_16_test_02(){
+    void RESP_16_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -544,7 +541,7 @@ public class MainTest {
 
     @Test
     @DisplayName("User place hold on existing book")
-    void RESP_17_test_01(){
+    void RESP_17_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -559,7 +556,7 @@ public class MainTest {
 
     @Test
     @DisplayName("User place hold on non-existing book")
-    void RESP_17_test_02(){
+    void RESP_17_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -573,11 +570,10 @@ public class MainTest {
 
     @Test
     @DisplayName("Clear data on user logout")
-    void RESP_18_test_01(){
+    void RESP_18_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
         librarySystem.authenticate("Pogchamp1234!");
-
 
         librarySystem.logOut();
         assertFalse(librarySystem.loggedIn());
@@ -585,7 +581,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Don't clear data when no user logout")
-    void RESP_18_test_02(){
+    void RESP_18_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
         librarySystem.authenticate("Pogchamp1234!");

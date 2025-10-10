@@ -13,7 +13,7 @@ public class LibrarySystem {
     private Book currentBook = null;
     private final ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
-    public void initializeBooks(){
+    public void initializeBooks() {
         books.addAll(List.of(
                 new Book("Don Quixote", "Miguel de Cervantes"),
                 new Book("The Great Gatsby", "F. Scott Fitzgerald"),
@@ -34,11 +34,10 @@ public class LibrarySystem {
                 new Book("Frankenstein", "Mary Shelley"),
                 new Book("Les Misérables", "Victor Hugo"),
                 new Book("Dracula", "Bram Stoker"),
-                new Book("A Christmas Carol", "Charles Dickens")
-        ));
+                new Book("A Christmas Carol", "Charles Dickens")));
     }
 
-    public void initializeBorrowers(){
+    public void initializeBorrowers() {
         borrowers.addAll(List.of(
                 new Borrower("Stephen King", "Pogchamp1234!"),
                 new Borrower("Charles Darwin", "Skibidi5678!"),
@@ -49,13 +48,12 @@ public class LibrarySystem {
         ));
     }
 
-
     public void initializeLibrary() {
         this.initializeBooks();
         this.initializeBorrowers();
     }
 
-    public Book getBook(int index){
+    public Book getBook(int index) {
         return books.get(index);
     }
 
@@ -63,17 +61,17 @@ public class LibrarySystem {
         return books.size();
     }
 
-    public int getNumBorrowers(){
+    public int getNumBorrowers() {
         return borrowers.size();
     }
 
-    public Borrower getBorrower(int index){
+    public Borrower getBorrower(int index) {
         return borrowers.get(index);
     }
 
-    public boolean authenticate(String password){
-        for(Borrower borrower: borrowers){
-            if(borrower.isPassword(password)){
+    public boolean authenticate(String password) {
+        for (Borrower borrower : borrowers) {
+            if (borrower.isPassword(password)) {
                 currentUser = borrower;
                 return true;
             }
@@ -81,70 +79,80 @@ public class LibrarySystem {
         return false;
     }
 
-    public boolean loggedIn(){
+    public boolean loggedIn() {
         return (currentUser != null);
     }
 
-    public String createDueDate(){
+    public String createDueDate() {
         LocalDate dueDate = LocalDate.now().plusDays(14);
-        return dueDate.getYear()+"-"+dueDate.getMonthValue()+"-"+dueDate.getDayOfMonth();
+        return dueDate.getYear() + "-" + dueDate.getMonthValue() + "-" + dueDate.getDayOfMonth();
     }
 
-    public void logOut(){
-        currentUser=null;
+    public void logOut() {
+        currentUser = null;
     }
 
     public ArrayList<Book> getReadyToBorrowHolds() {
         return currentUser.getReadyToBorrowHolds();
     }
 
-    public boolean userIsEligible(){
+    public boolean userIsEligible() {
         return currentUser.isEligible();
     }
 
-    public void selectBook(int index){
-        if(index >=0 && index < 20) currentBook = getBook(index);
+    public void selectBook(int index) {
+        if (index >= 0 && index < 20)
+            currentBook = getBook(index);
     }
 
-    public boolean bookSelected(){
+    public boolean bookSelected() {
         return currentBook != null;
     }
 
-    public Status bookIsAvailable(){
-        if(currentBook.getStatus()==Status.UNAVAILABLE) return Status.UNAVAILABLE;
-        if(!currentBook.hasNoHolds() && currentBook.nextQueuedUser()==currentUser){
+    public Status bookIsAvailable() {
+        if (currentBook.getStatus() == Status.UNAVAILABLE)
+            return Status.UNAVAILABLE;
+        if (!currentBook.hasNoHolds() && currentBook.nextQueuedUser() == currentUser) {
             return Status.AVAILABLE;
-        }else if(!currentBook.hasNoHolds()) return Status.ON_HOLD;
+        } else if (!currentBook.hasNoHolds())
+            return Status.ON_HOLD;
         return currentBook.getStatus();
     }
 
-    public boolean borrow(){
-        if(currentBook == null) return false;
+    public boolean borrow() {
+        if (currentBook == null)
+            return false;
         currentBook.signOutBy(currentUser, createDueDate());
         currentUser.borrowBook(currentBook);
         return true;
     }
 
-    public void createTransaction(){
-        if(currentUser!=null && currentBook!=null) transactions.add(new Transaction(currentUser, currentBook, createDueDate()));
+    public void createTransaction() {
+        if (currentUser != null && currentBook != null)
+            transactions.add(new Transaction(currentUser, currentBook, createDueDate()));
     }
-    public Transaction getLastTransaction(){
-        if(transactions.isEmpty()) return null;
+
+    public Transaction getLastTransaction() {
+        if (transactions.isEmpty())
+            return null;
         return transactions.getLast();
     }
 
-    public void selectBorrowedBook(int index){
+    public void selectBorrowedBook(int index) {
         currentBook = null;
-        if(index >=0 && index < currentUser.getNumBorrowedBooks()) currentBook = currentUser.getBorrowedBook(index);;
+        if (index >= 0 && index < currentUser.getNumBorrowedBooks())
+            currentBook = currentUser.getBorrowedBook(index);
+        ;
     }
 
-    public void returnBook(){
-        if(currentBook==null) return;
+    public void returnBook() {
+        if (currentBook == null)
+            return;
         currentBook.returned();
         currentUser.returnBook(currentBook);
     }
 
-    public Transaction getConfirmation(){
+    public Transaction getConfirmation() {
         return transactions.getLast();
     }
 

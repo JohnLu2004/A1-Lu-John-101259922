@@ -10,28 +10,31 @@ public class Borrower {
     private final HashSet<Book> booksPlacedOnHold = new HashSet<Book>();
     private final ArrayList<Book> borrowedBooks = new ArrayList<Book>();
 
-
-    public Borrower(String name, String password){
+    public Borrower(String name, String password) {
         this.name = name;
         this.password = password;
     }
 
-    public String getName(){return this.name;}
+    public String getName() {
+        return this.name;
+    }
 
-    public boolean isPassword(String password){
+    public boolean isPassword(String password) {
         return this.password.equals(password);
     }
 
-    public void placeHold(Book book){
-        if(book!=null && !booksPlacedOnHold.contains(book)) {
+    public void placeHold(Book book) {
+        if (book != null && !booksPlacedOnHold.contains(book)) {
             book.placeHold(this);
             booksPlacedOnHold.add(book);
         }
     }
 
-    public int getNumHolds(){return booksPlacedOnHold.size();}
+    public int getNumHolds() {
+        return booksPlacedOnHold.size();
+    }
 
-    public boolean hasBorrowed(Book book){
+    public boolean hasBorrowed(Book book) {
         return borrowedBooks.contains(book);
     }
 
@@ -39,11 +42,11 @@ public class Borrower {
         borrowedBooks.add(book);
     }
 
-    public Book getBorrowedBook(int index){
+    public Book getBorrowedBook(int index) {
         return borrowedBooks.get(index);
     }
 
-    public void returnBook(Book book){
+    public void returnBook(Book book) {
         this.borrowedBooks.remove(book);
     }
 
@@ -57,17 +60,17 @@ public class Borrower {
         return onHoldBooksAvailable;
     }
 
-    public boolean isEligible(){
+    public boolean isEligible() {
         return this.borrowedBooks.size() <= 2;
     }
 
-    public int getNumBorrowedBooks(){
+    public int getNumBorrowedBooks() {
         return this.borrowedBooks.size();
     }
 
-    public boolean borrowed(Book book){
-        for(Book borrowedBook: borrowedBooks){
-            if(borrowedBook == book){
+    public boolean borrowed(Book book) {
+        for (Book borrowedBook : borrowedBooks) {
+            if (borrowedBook == book) {
                 return true;
             }
         }
