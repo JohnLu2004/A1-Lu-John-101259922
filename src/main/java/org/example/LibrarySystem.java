@@ -49,15 +49,15 @@ public class LibrarySystem {
         newBook = new Book("A Christmas Carol", "Charles Dickens");
         books.add(newBook);
 
-        Borrower newBorrower = new Borrower("Stephen King");
+        Borrower newBorrower = new Borrower("Stephen King", "Pogchamp1234!");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower("Charles Darwin");
+        newBorrower = new Borrower("Charles Darwin", "Skibidi5678!");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower("William Shakespeare");
+        newBorrower = new Borrower("William Shakespeare", "Goon4321!");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower("Julius Caesar");
+        newBorrower = new Borrower("Julius Caesar", "Brainrot8765!");
         borrowers.add(newBorrower);
-         newBorrower = new Borrower("Charles Dickens");
+        newBorrower = new Borrower("Charles Dickens", "Rizz1010!");
         borrowers.add(newBorrower);
     }
 
@@ -78,6 +78,11 @@ public class LibrarySystem {
     }
 
     public boolean authenticate(String password){
+        for(Borrower borrower: borrowers){
+            if(borrower.password.equals(password)){
+                return true;
+            }
+        }
         return false;
     }
 }
