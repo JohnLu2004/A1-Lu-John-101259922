@@ -149,6 +149,6 @@ public class LibrarySystem {
     }
 
     public ArrayList<Book> getBorrowedBooks() {
-        return new ArrayList<Book>();
+        return currentUser.getBorrowedBooks();
     }
 }

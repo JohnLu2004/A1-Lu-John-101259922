@@ -73,4 +73,8 @@ public class Borrower {
         }
         return false;
     }
+
+    public ArrayList<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
 }
