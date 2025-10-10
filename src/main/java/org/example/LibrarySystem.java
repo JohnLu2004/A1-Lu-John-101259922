@@ -145,6 +145,6 @@ public class LibrarySystem {
     }
 
     public Transaction getConfirmation(){
-        return new Transaction(null, null, null);
+        return transactions.getLast();
     }
 }
