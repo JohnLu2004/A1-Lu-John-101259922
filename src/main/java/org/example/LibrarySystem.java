@@ -10,6 +10,8 @@ public class LibrarySystem {
     ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
     Borrower currentUser = null;
     Book currentBook = null;
+    ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
 
     public void initializeLibrary() {
         Book newBook = new Book("Don Quixote", "Miguel de Cervantes");
@@ -150,8 +152,10 @@ public class LibrarySystem {
     }
 
     public void createTransaction(){
+        if(currentUser!=null && currentBook!=null) transactions.add(new Transaction(currentUser, currentBook));
     }
     public Transaction getLastTransaction(){
-        return new Transaction();
+        if(transactions.isEmpty()) return null;
+        return transactions.getLast();
     }
 }
