@@ -148,4 +148,10 @@ public class LibrarySystem {
         currentUser.borrowedBooks.add(currentBook);
         return true;
     }
+
+    public void createTransaction(){
+    }
+    public Transaction getLastTransaction(){
+        return new Transaction();
+    }
 }

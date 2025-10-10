@@ -352,6 +352,41 @@ public class MainTest {
 
     @Test
     @DisplayName("System borrowing transaction creation")
+    void RESP_11_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower = librarySystem.getBorrower(0);
+        Book book = librarySystem.getBook(0);
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+
+        librarySystem.createTransaction();
+
+        Transaction lastTransaction = librarySystem.getLastTransaction();
+        assertEquals(borrower, lastTransaction.getBorrower());
+        assertEquals(book, lastTransaction.getBook());
+    }
+
+    @Test
+    @DisplayName("System borrowing transaction creation with book not borrowed")
+    void RESP_11_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        librarySystem.createTransaction();
+
+        assertNull(librarySystem.getLastTransaction());
+
+    }
+
+    @Test
+    @DisplayName("System borrowing transaction creation")
     void RESP_12_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
