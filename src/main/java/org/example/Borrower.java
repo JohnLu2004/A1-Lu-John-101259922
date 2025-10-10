@@ -1,11 +1,13 @@
 package org.example;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 public class Borrower {
     public String name;
     public String password;
     public ArrayDeque<Book> queue = new ArrayDeque<Book>();
+    public ArrayList<Book> borrowedBooks = new ArrayList<Book>();
 
 
     public Borrower(String name, String password){
@@ -27,6 +29,11 @@ public class Borrower {
     }
 
     public boolean borrowed(Book book){
+        for(Book borrowedBook: borrowedBooks){
+            if(borrowedBook == book){
+                return true;
+            }
+        }
         return false;
     }
 }

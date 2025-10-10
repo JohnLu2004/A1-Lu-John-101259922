@@ -140,6 +140,12 @@ public class LibrarySystem {
     }
 
     public boolean borrow(){
+        if(currentBook == null) return false;
+        currentBook.dueDate = createDueDate();
+        currentBook.borrower = currentUser;
+        currentBook.status = "UNAVAILABLE";
+
+        currentUser.borrowedBooks.add(currentBook);
         return true;
     }
 }

@@ -6,7 +6,9 @@ public class Book {
     public String title;
     public String author;
     public String status;
+    public String dueDate;
     public ArrayDeque<Borrower> queue = new ArrayDeque<Borrower>();
+    public Borrower borrower = null;
 
 
     public Book(String title, String author){
@@ -26,6 +28,6 @@ public class Book {
     public int getNumHolds(){return queue.size();}
 
     public boolean borrowedBy(Borrower borrower){
-        return false;
+        return this.borrower == borrower;
     }
 }
