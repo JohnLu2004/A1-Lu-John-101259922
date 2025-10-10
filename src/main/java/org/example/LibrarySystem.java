@@ -81,6 +81,7 @@ public class LibrarySystem {
     public boolean authenticate(String password){
         for(Borrower borrower: borrowers){
             if(borrower.password.equals(password)){
+                currentUser = borrower;
                 return true;
             }
         }
@@ -88,6 +89,6 @@ public class LibrarySystem {
     }
 
     public boolean loggedIn(){
-        return false;
+        return (currentUser != null);
     }
 }
