@@ -147,4 +147,8 @@ public class LibrarySystem {
     public Transaction getConfirmation(){
         return transactions.getLast();
     }
+
+    public ArrayList<Book> getBorrowedBooks() {
+        return new ArrayList<Book>();
+    }
 }

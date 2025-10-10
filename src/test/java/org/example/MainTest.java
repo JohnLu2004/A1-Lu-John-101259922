@@ -466,6 +466,43 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("Returns books borrowed by user")
+    void RESP_14_test_01() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.createTransaction();
+
+        librarySystem.selectBook(7);
+        librarySystem.borrow();
+        librarySystem.createTransaction();
+
+        ArrayList<Book> borrowedBooks = librarySystem.getBorrowedBooks();
+        Book book1 = librarySystem.getBook(0);
+        Book book2 = librarySystem.getBook(7);
+
+        assertEquals(2, borrowedBooks.size());
+        assertEquals(book1, borrowedBooks.get(0));
+        assertEquals(book2, borrowedBooks.get(1));
+    }
+
+    @Test
+    @DisplayName("Returns no books if none borrowed by user")
+    void RESP_14_test_02() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        ArrayList<Book> borrowedBooks = librarySystem.getBorrowedBooks();
+        assertEquals(0, borrowedBooks.size());
+    }
+
+    @Test
     @DisplayName("System clears book of borrower and borrower us book when returned")
     void RESP_16_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();
