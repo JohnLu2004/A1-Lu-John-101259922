@@ -213,6 +213,67 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("System verification of book with no holds not taken")
+    void RESP_08_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.selectBook(0);
+
+        assertEquals("AVAILABLE", librarySystem.bookIsAvailable());
+    }
+
+    @Test
+    @DisplayName("System verification of book with no holds but taken")
+    void RESP_08_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Book book = librarySystem.getBook(0);
+        book.setStatus("UNAVAILABLE");
+
+        librarySystem.selectBook(0);
+
+        assertEquals("UNAVAILABLE", librarySystem.bookIsAvailable());
+    }
+
+    @Test
+    @DisplayName("System verification of book with holds but not taken")
+    void RESP_08_test_03(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower2 = librarySystem.getBorrower(1);
+        Book book1 = librarySystem.getBook(0);
+        borrower2.borrowBook(book1);
+
+        librarySystem.selectBook(0);
+
+        assertEquals("ON_HOLD", librarySystem.bookIsAvailable());
+    }
+
+    @Test
+    @DisplayName("System verification of book with hold and taken")
+    void RESP_08_test_04(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower2 = librarySystem.getBorrower(1);
+        Borrower borrower3 = librarySystem.getBorrower(2);
+        Book book1 = librarySystem.getBook(0);
+        borrower2.borrowBook(book1);
+        borrower3.borrowBook(book1);
+
+        librarySystem.selectBook(0);
+
+        librarySystem.selectBook(0);
+
+        assertEquals("UNAVAILABLE", librarySystem.bookIsAvailable());
+    }
+
+
+
+    @Test
     @DisplayName("System verification of user eligibility when user has 0s book taken")
     void RESP_09_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();

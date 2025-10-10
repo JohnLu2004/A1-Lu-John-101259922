@@ -96,10 +96,6 @@ public class LibrarySystem {
         return (currentUser != null);
     }
 
-    public String bookIsAvailable(){
-        return "UNAVAILABLE";
-    }
-
     public String createDueDate(){
         LocalDate dueDate = LocalDate.now().plusDays(14);
         return dueDate.getYear()+"-"+dueDate.getMonthValue()+"-"+dueDate.getDayOfMonth();
@@ -129,5 +125,17 @@ public class LibrarySystem {
 
     public boolean bookSelected(){
         return currentBook != null;
+    }
+
+    public String bookIsAvailable(){
+        if(currentBook.status.equals("UNAVAILABLE")){
+            return "UNAVAILABLE";
+        }
+        if(!currentBook.queue.isEmpty() && currentBook.queue.getFirst()==currentUser){
+            return "AVAILABLE";
+        }else if(!currentBook.queue.isEmpty()){
+            return "ON_HOLD";
+        }
+        return currentBook.status;
     }
 }
