@@ -200,7 +200,7 @@ public class MainTest {
         Borrower borrower = librarySystem.getBorrower(1);
         Book book = librarySystem.getBook(0);
 
-        //make sure user only has hold on 1 book and book only has 1 hold
+        // make sure user only has hold on 1 book and book only has 1 hold
         assertEquals(1, borrower.getNumHolds());
         assertEquals(1, book.getNumHolds());
     }
@@ -227,7 +227,7 @@ public class MainTest {
         Borrower borrower = librarySystem.getBorrower(1);
         Book book = librarySystem.getBook(0);
 
-        //make sure user only has hold on 1 book and book only has 1 hold
+        // make sure user only has hold on 1 book and book only has 1 hold
         assertEquals(1, borrower.getNumHolds());
         assertEquals(1, book.getNumHolds());
     }

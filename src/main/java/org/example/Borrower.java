@@ -68,16 +68,11 @@ public class Borrower {
         return this.borrowedBooks.size();
     }
 
-    public boolean borrowed(Book book) {
-        for (Book borrowedBook : borrowedBooks) {
-            if (borrowedBook == book) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public ArrayList<Book> getBorrowedBooks() {
         return borrowedBooks;
+    }
+
+    public HashSet<Book> getBooksOnHold(){
+        return booksPlacedOnHold;
     }
 }

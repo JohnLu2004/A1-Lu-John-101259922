@@ -30,12 +30,14 @@ public class Book {
         return this.status;
     }
 
+    public String getDueDate() { return dueDate;}
+
     public void setStatus(Status status) {
         this.status = status;
     }
 
     public void placeHold(Borrower borrower) {
-        if(!setOfHolders.contains(borrower)) {
+        if (!setOfHolders.contains(borrower)) {
             queue.add(borrower);
             setOfHolders.add(borrower);
         }
@@ -72,7 +74,7 @@ public class Book {
         return this.queue.getFirst();
     }
 
-    public void removeNextQueuedUser(){
+    public void removeNextQueuedUser() {
         this.setOfHolders.remove(this.queue.removeFirst());
     }
 }

@@ -1,9 +1,8 @@
 package org.example;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 public class LibrarySystem {
@@ -112,7 +111,8 @@ public class LibrarySystem {
     public Status bookIsAvailable() {
         if (currentBook.getStatus() == Status.UNAVAILABLE)
             return Status.UNAVAILABLE;
-        else if (currentBook.getStatus()==Status.ON_HOLD && !currentBook.hasNoHolds() && currentBook.nextQueuedUser() == currentUser) {
+        else if (currentBook.getStatus() == Status.ON_HOLD && !currentBook.hasNoHolds()
+                && currentBook.nextQueuedUser() == currentUser) {
             currentBook.removeNextQueuedUser();
             return Status.AVAILABLE;
         } else if (!currentBook.hasNoHolds())
@@ -123,15 +123,16 @@ public class LibrarySystem {
     public boolean borrow() {
         if (currentBook == null)
             return false;
-        //If book is available or they're next in the queue
-        if(currentUser.isEligible() && this.bookIsAvailable()==Status.AVAILABLE) {
+        // If book is available or they're next in the queue
+        if (currentUser.isEligible() && this.bookIsAvailable() == Status.AVAILABLE) {
             currentBook.signOutBy(currentUser, createDueDate());
             currentUser.borrowBook(currentBook);
-        }else{
+            return true;
+        } else {
             currentUser.placeHold(currentBook);
             currentBook.placeHold(currentUser);
+            return false;
         }
-        return true;
     }
 
     public void createTransaction() {
@@ -165,5 +166,17 @@ public class LibrarySystem {
 
     public ArrayList<Book> getBorrowedBooks() {
         return currentUser.getBorrowedBooks();
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public HashSet<Book> getBooksOnHold() {
+        return currentUser.getBooksOnHold();
+    }
+
+    public HashSet<Book> getBooksOnHold(){
+        return currentUser.getBooksOnHold();
     }
 }
