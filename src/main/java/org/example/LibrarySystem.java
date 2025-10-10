@@ -103,5 +103,7 @@ public class LibrarySystem {
         return dueDate.getYear()+"-"+dueDate.getMonthValue()+"-"+dueDate.getDayOfMonth();
     }
 
-    public void logOut(){}
+    public void logOut(){
+        currentUser=null;
+    }
 }
