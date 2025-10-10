@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayDeque;
+import java.util.HashSet;
 
 public class Book {
     private final String title;
@@ -8,6 +9,7 @@ public class Book {
     private Status status;
     private String dueDate;
     private final ArrayDeque<Borrower> queue = new ArrayDeque<Borrower>();
+    private final HashSet<Borrower> setOfHolders = new HashSet<Borrower>();
     private Borrower borrower = null;
 
     public Book(String title, String author) {
@@ -33,7 +35,10 @@ public class Book {
     }
 
     public void placeHold(Borrower borrower) {
-        queue.add(borrower);
+        if(!setOfHolders.contains(borrower)) {
+            queue.add(borrower);
+            setOfHolders.add(borrower);
+        }
     }
 
     public int getNumHolds() {
@@ -65,5 +70,9 @@ public class Book {
 
     public Borrower nextQueuedUser() {
         return this.queue.getFirst();
+    }
+
+    public void removeNextQueuedUser(){
+        this.setOfHolders.remove(this.queue.removeFirst());
     }
 }

@@ -112,7 +112,8 @@ public class LibrarySystem {
     public Status bookIsAvailable() {
         if (currentBook.getStatus() == Status.UNAVAILABLE)
             return Status.UNAVAILABLE;
-        if (!currentBook.hasNoHolds() && currentBook.nextQueuedUser() == currentUser) {
+        else if (currentBook.getStatus()==Status.ON_HOLD && !currentBook.hasNoHolds() && currentBook.nextQueuedUser() == currentUser) {
+            currentBook.removeNextQueuedUser();
             return Status.AVAILABLE;
         } else if (!currentBook.hasNoHolds())
             return Status.ON_HOLD;
@@ -122,8 +123,14 @@ public class LibrarySystem {
     public boolean borrow() {
         if (currentBook == null)
             return false;
-        currentBook.signOutBy(currentUser, createDueDate());
-        currentUser.borrowBook(currentBook);
+        //If book is available or they're next in the queue
+        if(currentUser.isEligible() && this.bookIsAvailable()==Status.AVAILABLE) {
+            currentBook.signOutBy(currentUser, createDueDate());
+            currentUser.borrowBook(currentBook);
+        }else{
+            currentUser.placeHold(currentBook);
+            currentBook.placeHold(currentUser);
+        }
         return true;
     }
 
