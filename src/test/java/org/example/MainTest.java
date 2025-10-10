@@ -213,7 +213,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("System verification of book with no holds not taken")
+    @DisplayName("System verification of book with no holds not taken: AVAILABLE")
     void RESP_08_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
@@ -224,7 +224,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("System verification of book with no holds but taken")
+    @DisplayName("System verification of book with no holds but taken: UNAVAILABLE")
     void RESP_08_test_02(){
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
@@ -238,14 +238,14 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("System verification of book with holds but not taken")
+    @DisplayName("System verification of book with holds but not taken: ON_HOLD")
     void RESP_08_test_03(){
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
         Borrower borrower2 = librarySystem.getBorrower(1);
         Book book1 = librarySystem.getBook(0);
-        borrower2.borrowBook(book1);
+        borrower2.placeHold(book1);
 
         librarySystem.selectBook(0);
 
@@ -253,7 +253,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("System verification of book with hold and taken")
+    @DisplayName("System verification of book with hold and taken: UNAVAILABLE")
     void RESP_08_test_04(){
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
@@ -261,8 +261,9 @@ public class MainTest {
         Borrower borrower2 = librarySystem.getBorrower(1);
         Borrower borrower3 = librarySystem.getBorrower(2);
         Book book1 = librarySystem.getBook(0);
-        borrower2.borrowBook(book1);
-        borrower3.borrowBook(book1);
+        book1.setStatus("UNAVAILABLE");
+        borrower2.placeHold(book1);
+        borrower3.placeHold(book1);
 
         librarySystem.selectBook(0);
 
