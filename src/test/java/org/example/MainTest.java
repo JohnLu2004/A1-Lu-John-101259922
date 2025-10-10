@@ -3,6 +3,10 @@ package org.example;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
@@ -119,5 +123,50 @@ public class MainTest {
         librarySystem.initializeLibrary();
 
         assertFalse(librarySystem.loggedIn());
+    }
+
+    @Test
+    @DisplayName("System creates a due date that is 14 days later")
+    void RESP_10_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        String dueDate = librarySystem.createDueDate();
+
+        LocalDate expectedDueDate = LocalDate.now().plusDays(14);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String expectedFormattedDate = expectedDueDate.format(formatter);
+
+        assertEquals(expectedFormattedDate, dueDate);
+    }
+
+    @Test
+    @DisplayName("System creates a due date that is not before 14 days later")
+    void RESP_10_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        String dueDate = librarySystem.createDueDate();
+
+        LocalDate expectedDueDate = LocalDate.now().plusDays(14);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate actualDueDate = LocalDate.parse(dueDate, formatter);
+
+        assertFalse(actualDueDate.isBefore(expectedDueDate));
+    }
+
+    @Test
+    @DisplayName("System creates a due date that is not after 14 days later")
+    void RESP_10_test_03(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        String dueDate = librarySystem.createDueDate();
+
+        LocalDate expectedDueDate = LocalDate.now().plusDays(14);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate actualDueDate = LocalDate.parse(dueDate, formatter);
+
+        assertFalse(actualDueDate.isAfter(expectedDueDate));
     }
 }

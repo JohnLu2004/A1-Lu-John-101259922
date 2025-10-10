@@ -1,7 +1,8 @@
 package org.example;
 
-import java.sql.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LibrarySystem {
     ArrayList<Book> books = new ArrayList<Book>();
@@ -50,6 +51,7 @@ public class LibrarySystem {
         newBook = new Book("A Christmas Carol", "Charles Dickens");
         books.add(newBook);
 
+
         Borrower newBorrower = new Borrower("Stephen King", "Pogchamp1234!");
         borrowers.add(newBorrower);
         newBorrower = new Borrower("Charles Darwin", "Skibidi5678!");
@@ -90,5 +92,13 @@ public class LibrarySystem {
 
     public boolean loggedIn(){
         return (currentUser != null);
+    }
+
+    public String bookIsAvailable(){
+        return "UNAVAILABLE";
+    }
+
+    public String createDueDate(){
+        return "2020-10-21";
     }
 }
