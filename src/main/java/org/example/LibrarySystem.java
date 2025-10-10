@@ -158,4 +158,12 @@ public class LibrarySystem {
         if(transactions.isEmpty()) return null;
         return transactions.getLast();
     }
+
+    public void selectBorrowedBook(int index){
+
+    }
+
+    public void returnBook(){
+
+    }
 }

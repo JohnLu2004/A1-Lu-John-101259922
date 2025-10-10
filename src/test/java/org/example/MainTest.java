@@ -420,6 +420,46 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("System clears book of borrower and borrower us book when returned")
+    void RESP_16_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower = librarySystem.getBorrower(0);
+        Book book = librarySystem.getBook(0);
+
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+
+        librarySystem.selectBorrowedBook(0);
+        librarySystem.returnBook();
+
+        assertFalse(book.borrowedBy(borrower));
+        assertFalse(borrower.borrowed(book));
+    }
+
+    @Test
+    @DisplayName("Book not returned when no valid option selected")
+    void RESP_16_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower = librarySystem.getBorrower(0);
+        Book book = librarySystem.getBook(0);
+
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+
+        librarySystem.selectBorrowedBook(30);
+        librarySystem.returnBook();
+
+        assertTrue(book.borrowedBy(borrower));
+        assertTrue(borrower.borrowed(book));
+    }
+
+    @Test
     @DisplayName("User place hold on existing book")
     void RESP_17_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();
