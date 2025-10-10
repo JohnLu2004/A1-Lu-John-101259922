@@ -99,6 +99,7 @@ public class LibrarySystem {
     }
 
     public String createDueDate(){
-        return "2020-10-21";
+        LocalDate dueDate = LocalDate.now().plusDays(14);
+        return dueDate.getYear()+"-"+dueDate.getMonthValue()+"-"+dueDate.getDayOfMonth();
     }
 }
