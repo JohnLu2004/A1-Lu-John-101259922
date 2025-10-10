@@ -182,6 +182,37 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("Verification of system selection of book")
+    void RESP_07_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.selectBook(0);
+
+        assertTrue(librarySystem.bookSelected());
+    }
+
+    @Test
+    @DisplayName("Verification of system selection of book out of bounds")
+    void RESP_07_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.selectBook(20);
+
+        assertFalse(librarySystem.bookSelected());
+    }
+
+    @Test
+    @DisplayName("Verification of system selection of no book")
+    void RESP_07_test_03(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        assertFalse(librarySystem.bookSelected());
+    }
+
+    @Test
     @DisplayName("System verification of user eligibility when user has 0s book taken")
     void RESP_09_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();

@@ -121,4 +121,12 @@ public class LibrarySystem {
     public boolean userIsEligible(){
         return currentUser.queue.size()<3;
     }
+
+    public void selectBook(int index){
+
+    }
+
+    public boolean bookSelected(){
+        return false;
+    }
 }
