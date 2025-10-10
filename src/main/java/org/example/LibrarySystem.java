@@ -4,68 +4,55 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LibrarySystem {
-    ArrayList<Book> books = new ArrayList<Book>();
-    ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
-    Borrower currentUser = null;
-    Book currentBook = null;
-    ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private final ArrayList<Book> books = new ArrayList<Book>();
+    private final ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
+    private Borrower currentUser = null;
+    private Book currentBook = null;
+    private final ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
+    public void initializeBooks(){
+        books.addAll(List.of(
+                new Book("Don Quixote", "Miguel de Cervantes"),
+                new Book("The Great Gatsby", "F. Scott Fitzgerald"),
+                new Book("The Catcher in the Rye", "J. D. Salinger"),
+                new Book("Moby Dick", "Herman Melville"),
+                new Book("Pride and Prejudice", "Jane Austen"),
+                new Book("Dune", "Frank Herbert"),
+                new Book("The Lord of the Rings", "J. R. R. Tolkien"),
+                new Book("To Kill a Mockingbird", "Harper Lee"),
+                new Book("The Trial", "Franz Kafka"),
+                new Book("Journey to the West", "Wu Cheng En"),
+                new Book("Adventures of Huckleberry Finn", "Mark Twain"),
+                new Book("The Odyssey", "Homer"),
+                new Book("1984", "George Orwell"),
+                new Book("The Divine Comedy", "Dante Alighieri"),
+                new Book("The Little Prince", "Antoine de Saint-Exupéry"),
+                new Book("The Alchemist", "Paulo Coelho"),
+                new Book("Frankenstein", "Mary Shelley"),
+                new Book("Les Misérables", "Victor Hugo"),
+                new Book("Dracula", "Bram Stoker"),
+                new Book("A Christmas Carol", "Charles Dickens")
+        ));
+    }
+
+    public void initializeBorrowers(){
+        borrowers.addAll(List.of(
+                new Borrower("Stephen King", "Pogchamp1234!"),
+                new Borrower("Charles Darwin", "Skibidi5678!"),
+                new Borrower("William Shakespeare", "Goon4321!"),
+                new Borrower("Julius Caesar", "Brainrot8765!"),
+                new Borrower("Charles Dickens", "Rizz1010!")
+
+        ));
+    }
 
 
     public void initializeLibrary() {
-        Book newBook = new Book("Don Quixote", "Miguel de Cervantes");
-        books.add(newBook);
-        newBook = new Book("The Great Gatsby", "F. Scott Fitzgerald");
-        books.add(newBook);
-        newBook = new Book("The Catcher in the Rye", "J. D. Salinger");
-        books.add(newBook);
-        newBook = new Book("Moby Dick", "Herman Melville");
-        books.add(newBook);
-        newBook = new Book("Pride and Prejudice", "Jane Austen");
-        books.add(newBook);
-        newBook = new Book("Dune", "Frank Herbert");
-        books.add(newBook);
-        newBook = new Book("The Lord of the Rings", "J. R. R. Tolkien");
-        books.add(newBook);
-        newBook = new Book("To Kill a Mockingbird", "Harper Lee");
-        books.add(newBook);
-        newBook = new Book("The Trial", "Franz Kafka");
-        books.add(newBook);
-        newBook = new Book("Journey to the West", "Wu Cheng En");
-        books.add(newBook);
-        newBook = new Book("Adventures of Huckleberry Finn", "Mark Twain");
-        books.add(newBook);
-        newBook = new Book("The Odyssey", "Homer");
-        books.add(newBook);
-        newBook = new Book("1984", "George Orwell");
-        books.add(newBook);
-        newBook = new Book("The Divine Comedy", "Dante Alighieri");
-        books.add(newBook);
-        newBook = new Book("The Little Prince", "Antoine de Saint-Exupéry");
-        books.add(newBook);
-        newBook = new Book("The Alchemist", "Paulo Coelho");
-        books.add(newBook);
-        newBook = new Book("Frankenstein", "Mary Shelley");
-        books.add(newBook);
-        newBook = new Book("Les Misérables", "Victor Hugo");
-        books.add(newBook);
-        newBook = new Book("Dracula", "Bram Stoker");
-        books.add(newBook);
-        newBook = new Book("A Christmas Carol", "Charles Dickens");
-        books.add(newBook);
-
-
-        Borrower newBorrower = new Borrower("Stephen King", "Pogchamp1234!");
-        borrowers.add(newBorrower);
-        newBorrower = new Borrower("Charles Darwin", "Skibidi5678!");
-        borrowers.add(newBorrower);
-        newBorrower = new Borrower("William Shakespeare", "Goon4321!");
-        borrowers.add(newBorrower);
-        newBorrower = new Borrower("Julius Caesar", "Brainrot8765!");
-        borrowers.add(newBorrower);
-        newBorrower = new Borrower("Charles Dickens", "Rizz1010!");
-        borrowers.add(newBorrower);
+        this.initializeBooks();
+        this.initializeBorrowers();
     }
 
     public Book getBook(int index){
@@ -86,7 +73,7 @@ public class LibrarySystem {
 
     public boolean authenticate(String password){
         for(Borrower borrower: borrowers){
-            if(borrower.password.equals(password)){
+            if(borrower.isPassword(password)){
                 currentUser = borrower;
                 return true;
             }
@@ -107,18 +94,12 @@ public class LibrarySystem {
         currentUser=null;
     }
 
-    public ArrayList<Book> getOnHoldBooksAvailable(){
-        ArrayList<Book> onHoldBooksAvailable = new ArrayList<Book>();
-        for(Book book: currentUser.queue){
-            if(book.queue.getFirst()==currentUser && !book.status.equals("UNAVAILABLE")){
-                onHoldBooksAvailable.add(book);
-            }
-        }
-        return onHoldBooksAvailable;
+    public ArrayList<Book> getReadyToBorrowHolds() {
+        return currentUser.getReadyToBorrowHolds();
     }
 
     public boolean userIsEligible(){
-        return currentUser.queue.size()<3;
+        return currentUser.isEligible();
     }
 
     public void selectBook(int index){
@@ -129,30 +110,23 @@ public class LibrarySystem {
         return currentBook != null;
     }
 
-    public String bookIsAvailable(){
-        if(currentBook.status.equals("UNAVAILABLE")){
-            return "UNAVAILABLE";
-        }
-        if(!currentBook.queue.isEmpty() && currentBook.queue.getFirst()==currentUser){
-            return "AVAILABLE";
-        }else if(!currentBook.queue.isEmpty()){
-            return "ON_HOLD";
-        }
-        return currentBook.status;
+    public Status bookIsAvailable(){
+        if(currentBook.getStatus()==Status.UNAVAILABLE) return Status.UNAVAILABLE;
+        if(!currentBook.hasNoHolds() && currentBook.nextQueuedUser()==currentUser){
+            return Status.AVAILABLE;
+        }else if(!currentBook.hasNoHolds()) return Status.ON_HOLD;
+        return currentBook.getStatus();
     }
 
     public boolean borrow(){
         if(currentBook == null) return false;
-        currentBook.dueDate = createDueDate();
-        currentBook.borrower = currentUser;
-        currentBook.status = "UNAVAILABLE";
-
-        currentUser.borrowedBooks.add(currentBook);
+        currentBook.signOutBy(currentUser, createDueDate());
+        currentUser.borrowBook(currentBook);
         return true;
     }
 
     public void createTransaction(){
-        if(currentUser!=null && currentBook!=null) transactions.add(new Transaction(currentUser, currentBook));
+        if(currentUser!=null && currentBook!=null) transactions.add(new Transaction(currentUser, currentBook, createDueDate()));
     }
     public Transaction getLastTransaction(){
         if(transactions.isEmpty()) return null;
@@ -161,13 +135,12 @@ public class LibrarySystem {
 
     public void selectBorrowedBook(int index){
         currentBook = null;
-        if(index >=0 && index < currentUser.borrowedBooks.size()) currentBook = currentUser.borrowedBooks.get(index);
+        if(index >=0 && index < currentUser.getNumBorrowedBooks()) currentBook = currentUser.getBorrowedBook(index);;
     }
 
     public void returnBook(){
         if(currentBook==null) return;
-        currentBook.status="AVAILABLE";
-        currentBook.borrower=null;
-        currentUser.borrowedBooks.remove(currentBook);
+        currentBook.returned();
+        currentUser.returnBook(currentBook);
     }
 }

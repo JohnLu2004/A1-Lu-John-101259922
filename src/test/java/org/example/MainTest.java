@@ -31,16 +31,16 @@ public class MainTest {
         librarySystem.initializeLibrary();
 
         Book firstBook = librarySystem.getBook(0);
-        assertEquals("Don Quixote", firstBook.title);
-        assertEquals("Miguel de Cervantes", firstBook.author);
+        assertEquals("Don Quixote", firstBook.getTitle());
+        assertEquals("Miguel de Cervantes", firstBook.getAuthor());
 
         Book tenthBook = librarySystem.getBook(9);
-        assertEquals("Journey to the West", tenthBook.title);
-        assertEquals("Wu Cheng En", tenthBook.author);
+        assertEquals("Journey to the West", tenthBook.getTitle());
+        assertEquals("Wu Cheng En", tenthBook.getAuthor());
 
         Book twentiethBook = librarySystem.getBook(19);
-        assertEquals("A Christmas Carol", twentiethBook.title);
-        assertEquals("Charles Dickens", twentiethBook.author);
+        assertEquals("A Christmas Carol", twentiethBook.getTitle());
+        assertEquals("Charles Dickens", twentiethBook.getAuthor());
     }
 
     @Test
@@ -63,13 +63,13 @@ public class MainTest {
         librarySystem.initializeLibrary();
 
         Borrower firstBorrower = librarySystem.getBorrower(0);
-        assertEquals(firstBorrower.name, "Stephen King");
+        assertEquals(firstBorrower.getName(), "Stephen King");
 
         Borrower thirdBorrower = librarySystem.getBorrower(2);
-        assertEquals(thirdBorrower.name, "William Shakespeare");
+        assertEquals(thirdBorrower.getName(), "William Shakespeare");
 
         Borrower fifthBorrower = librarySystem.getBorrower(4);
-        assertEquals(fifthBorrower.name, "Charles Dickens");
+        assertEquals(fifthBorrower.getName(), "Charles Dickens");
     }
 
     @Test
@@ -141,7 +141,7 @@ public class MainTest {
 
         librarySystem.authenticate("Pogchamp1234!");
 
-        ArrayList<Book> availableBooksOnHold = librarySystem.getOnHoldBooksAvailable();
+        ArrayList<Book> availableBooksOnHold = librarySystem.getReadyToBorrowHolds();
 
         assertEquals(2, availableBooksOnHold.size());
     }
@@ -155,15 +155,15 @@ public class MainTest {
         Borrower borrower1 = librarySystem.getBorrower(0);
         Book book1 = librarySystem.getBook(0);
         Book book2 = librarySystem.getBook(1);
-        book1.setStatus("UNAVAILABLE");
-        book2.setStatus("UNAVAILABLE");
+        book1.setStatus(Status.UNAVAILABLE);
+        book2.setStatus(Status.UNAVAILABLE);
 
         borrower1.placeHold(book1);
         borrower1.placeHold(book2);
 
         librarySystem.authenticate("Pogchamp1234!");
 
-        ArrayList<Book> availableBooksOnHold = librarySystem.getOnHoldBooksAvailable();
+        ArrayList<Book> availableBooksOnHold = librarySystem.getReadyToBorrowHolds();
 
         assertEquals(0, availableBooksOnHold.size());
     }
@@ -176,7 +176,7 @@ public class MainTest {
 
         librarySystem.authenticate("Pogchamp1234!");
 
-        ArrayList<Book> availableBooksOnHold = librarySystem.getOnHoldBooksAvailable();
+        ArrayList<Book> availableBooksOnHold = librarySystem.getReadyToBorrowHolds();
 
         assertEquals(0, availableBooksOnHold.size());
     }
@@ -220,7 +220,7 @@ public class MainTest {
 
         librarySystem.selectBook(0);
 
-        assertEquals("AVAILABLE", librarySystem.bookIsAvailable());
+        assertEquals(Status.AVAILABLE, librarySystem.bookIsAvailable());
     }
 
     @Test
@@ -230,11 +230,11 @@ public class MainTest {
         librarySystem.initializeLibrary();
 
         Book book = librarySystem.getBook(0);
-        book.setStatus("UNAVAILABLE");
+        book.setStatus(Status.UNAVAILABLE);
 
         librarySystem.selectBook(0);
 
-        assertEquals("UNAVAILABLE", librarySystem.bookIsAvailable());
+        assertEquals(Status.UNAVAILABLE, librarySystem.bookIsAvailable());
     }
 
     @Test
@@ -249,7 +249,7 @@ public class MainTest {
 
         librarySystem.selectBook(0);
 
-        assertEquals("ON_HOLD", librarySystem.bookIsAvailable());
+        assertEquals(Status.ON_HOLD, librarySystem.bookIsAvailable());
     }
 
     @Test
@@ -261,7 +261,7 @@ public class MainTest {
         Borrower borrower2 = librarySystem.getBorrower(1);
         Borrower borrower3 = librarySystem.getBorrower(2);
         Book book1 = librarySystem.getBook(0);
-        book1.setStatus("UNAVAILABLE");
+        book1.setStatus(Status.UNAVAILABLE);
         borrower2.placeHold(book1);
         borrower3.placeHold(book1);
 
@@ -269,7 +269,7 @@ public class MainTest {
 
         librarySystem.selectBook(0);
 
-        assertEquals("UNAVAILABLE", librarySystem.bookIsAvailable());
+        assertEquals(Status.UNAVAILABLE, librarySystem.bookIsAvailable());
     }
 
 
@@ -367,8 +367,9 @@ public class MainTest {
         librarySystem.createTransaction();
 
         Transaction lastTransaction = librarySystem.getLastTransaction();
-        assertEquals(borrower, lastTransaction.getBorrower());
-        assertEquals(book, lastTransaction.getBook());
+        assertEquals(borrower, lastTransaction.borrower());
+        assertEquals(book, lastTransaction.book());
+        assertEquals(librarySystem.createDueDate(), lastTransaction.dueDate());
     }
 
     @Test
@@ -401,9 +402,9 @@ public class MainTest {
         Borrower borrower = librarySystem.getBorrower(0);
 
         //should say unavailable after borrowing
-        assertEquals("UNAVAILABLE", librarySystem.bookIsAvailable());
+        assertEquals(Status.UNAVAILABLE, librarySystem.bookIsAvailable());
         //user would show that they borrowed this book
-        assertTrue(borrower.borrowed(book));
+        assertTrue(borrower.hasBorrowed(book));
         //book would show borrowed by user
         assertTrue(book.borrowedBy(borrower));
     }
@@ -436,7 +437,7 @@ public class MainTest {
         librarySystem.returnBook();
 
         assertFalse(book.borrowedBy(borrower));
-        assertFalse(borrower.borrowed(book));
+        assertFalse(borrower.hasBorrowed(book));
     }
 
     @Test
@@ -456,7 +457,7 @@ public class MainTest {
         librarySystem.returnBook();
 
         assertTrue(book.borrowedBy(borrower));
-        assertTrue(borrower.borrowed(book));
+        assertTrue(borrower.hasBorrowed(book));
     }
 
     @Test
