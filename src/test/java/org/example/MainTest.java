@@ -182,6 +182,37 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("System verification of user eligibility when user has 0s book taken")
+    void RESP_09_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        assertTrue(librarySystem.userIsEligible());
+    }
+
+    @Test
+    @DisplayName("System verification of user eligibility when user has 3 books taken")
+    void RESP_09_test_2(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        //add 3 books
+        Borrower borrower = librarySystem.getBorrower(0);
+        Book book1 = librarySystem.getBook(0);
+        Book book2 = librarySystem.getBook(1);
+        Book book3 = librarySystem.getBook(2);
+        borrower.borrowBook(book1);
+        borrower.borrowBook(book2);
+        borrower.borrowBook(book3);
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        assertFalse(librarySystem.userIsEligible());
+    }
+
+    @Test
     @DisplayName("System creates a due date that is 14 days later")
     void RESP_10_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();

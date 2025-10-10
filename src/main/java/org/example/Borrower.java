@@ -21,4 +21,6 @@ public class Borrower {
     }
 
     public int getNumHolds(){return queue.size();}
+
+    public void borrowBook(Book book) {}
 }

@@ -117,4 +117,8 @@ public class LibrarySystem {
         }
         return onHoldBooksAvailable;
     }
+
+    public boolean userIsEligible(){
+        return false;
+    }
 }
