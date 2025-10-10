@@ -8,4 +8,8 @@ public class Borrower {
         this.name = name;
         this.password = password;
     }
+
+    public void placeHold(Book book){}
+
+    public int getNumHolds(){return 0;}
 }

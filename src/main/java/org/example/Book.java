@@ -11,4 +11,7 @@ public class Book {
         this.status = "AVAILABLE";
     }
 
+    public void placeHold(Borrower borrower){}
+
+    public int getNumHolds(){return 0;}
 }

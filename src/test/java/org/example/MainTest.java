@@ -169,4 +169,33 @@ public class MainTest {
 
         assertFalse(actualDueDate.isAfter(expectedDueDate));
     }
+
+    @Test
+    @DisplayName("User place hold on existing book")
+    void RESP_17_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower1 = librarySystem.getBorrower(0);
+        Book book1 = librarySystem.getBook(0);
+
+        borrower1.placeHold(book1);
+
+        assertEquals(1, borrower1.getNumHolds());
+        assertEquals(1, book1.getNumHolds());
+    }
+
+    @Test
+    @DisplayName("User place hold on non-existing book")
+    void RESP_17_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower1 = librarySystem.getBorrower(0);
+        Book book1 = null;
+
+        borrower1.placeHold(book1);
+
+        assertEquals(0, borrower1.getNumHolds());
+    }
 }
