@@ -138,4 +138,8 @@ public class LibrarySystem {
         }
         return currentBook.status;
     }
+
+    public boolean borrow(){
+        return true;
+    }
 }

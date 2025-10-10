@@ -24,4 +24,8 @@ public class Book {
     }
 
     public int getNumHolds(){return queue.size();}
+
+    public boolean borrowedBy(Borrower borrower){
+        return false;
+    }
 }

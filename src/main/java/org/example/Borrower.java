@@ -25,4 +25,8 @@ public class Borrower {
     public void borrowBook(Book book) {
         queue.add(book);
     }
+
+    public boolean borrowed(Book book){
+        return false;
+    }
 }

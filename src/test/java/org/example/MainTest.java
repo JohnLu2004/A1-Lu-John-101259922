@@ -351,6 +351,40 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("System borrowing transaction creation")
+    void RESP_12_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        librarySystem.selectBook(0);
+        assertTrue(librarySystem.borrow());
+
+        //book's status would be set to unavailable
+        Book book = librarySystem.getBook(0);
+        Borrower borrower = librarySystem.getBorrower(0);
+
+        //should say unavailable after borrowing
+        assertEquals("UNAVAILABLE", librarySystem.bookIsAvailable());
+        //user would show that they borrowed this book
+        assertTrue(borrower.borrowed(book));
+        //book would show borrowed by user
+        assertTrue(book.borrowedBy(borrower));
+    }
+
+    @Test
+    @DisplayName("System borrowing transaction creation when no book selected")
+    void RESP_12_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        assertFalse(librarySystem.borrow());
+    }
+
+    @Test
     @DisplayName("User place hold on existing book")
     void RESP_17_test_01(){
         LibrarySystem librarySystem = new LibrarySystem();
