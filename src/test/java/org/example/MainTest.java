@@ -181,6 +181,58 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("No system prevention of 1 hold attempt on a book")
+    void RESP_06_01() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        // user 1 borrows the book
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.logOut();
+
+        librarySystem.authenticate("Skibidi5678!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.selectBook(0);
+
+        Borrower borrower = librarySystem.getBorrower(1);
+        Book book = librarySystem.getBook(0);
+
+        //make sure user only has hold on 1 book and book only has 1 hold
+        assertEquals(1, borrower.getNumHolds());
+        assertEquals(1, book.getNumHolds());
+    }
+
+    @Test
+    @DisplayName("System prevention of multiple holds attempts on same book")
+    void RESP_06_02() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        // user 1 borrows the book
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.logOut();
+
+        librarySystem.authenticate("Skibidi5678!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.logOut();
+
+        Borrower borrower = librarySystem.getBorrower(1);
+        Book book = librarySystem.getBook(0);
+
+        //make sure user only has hold on 1 book and book only has 1 hold
+        assertEquals(1, borrower.getNumHolds());
+        assertEquals(1, book.getNumHolds());
+    }
+
+    @Test
     @DisplayName("Verification of system selection of book")
     void RESP_07_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
