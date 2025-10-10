@@ -86,4 +86,38 @@ public class MainTest {
 
         assertFalse(librarySystem.authenticate("$UncoolDude$"));
     }
+
+    @Test
+    @DisplayName("Check if authenticated user was set as current user")
+    void RESP_04_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        assertTrue(librarySystem.loggedIn());
+    }
+
+    @Test
+    @DisplayName("Check if unauthenticated user was set as current user")
+    void RESP_04_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Poggers1234!");
+
+        assertFalse(librarySystem.loggedIn());
+    }
+
+    @Test
+    @DisplayName("Check if user not logged in is logged in")
+    void RESP_04_test_03(){
+        LibrarySystem librarySystem = new LibrarySystem();
+
+        librarySystem.initializeLibrary();
+
+        assertFalse(librarySystem.loggedIn());
+    }
 }

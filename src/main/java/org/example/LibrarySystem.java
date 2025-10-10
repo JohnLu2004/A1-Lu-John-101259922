@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class LibrarySystem {
     ArrayList<Book> books = new ArrayList<Book>();
     ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
+    Borrower currentUser = null;
 
     public void initializeLibrary() {
         Book newBook = new Book("Don Quixote", "Miguel de Cervantes");
@@ -83,6 +84,10 @@ public class LibrarySystem {
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean loggedIn(){
         return false;
     }
 }
