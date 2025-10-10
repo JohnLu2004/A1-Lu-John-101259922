@@ -102,4 +102,6 @@ public class LibrarySystem {
         LocalDate dueDate = LocalDate.now().plusDays(14);
         return dueDate.getYear()+"-"+dueDate.getMonthValue()+"-"+dueDate.getDayOfMonth();
     }
+
+    public void logOut(){}
 }

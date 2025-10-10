@@ -198,4 +198,26 @@ public class MainTest {
 
         assertEquals(0, borrower1.getNumHolds());
     }
+
+    @Test
+    @DisplayName("Clear data on user logout")
+    void RESP_18_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+        librarySystem.authenticate("Pogchamp1234!");
+
+
+        librarySystem.logOut();
+        assertFalse(librarySystem.loggedIn());
+    }
+
+    @Test
+    @DisplayName("Don't clear data when no user logout")
+    void RESP_18_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+        librarySystem.authenticate("Pogchamp1234!");
+
+        assertTrue(librarySystem.loggedIn());
+    }
 }
