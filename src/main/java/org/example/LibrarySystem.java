@@ -9,6 +9,7 @@ public class LibrarySystem {
     ArrayList<Book> books = new ArrayList<Book>();
     ArrayList<Borrower> borrowers = new ArrayList<Borrower>();
     Borrower currentUser = null;
+    Book currentBook = null;
 
     public void initializeLibrary() {
         Book newBook = new Book("Don Quixote", "Miguel de Cervantes");
@@ -123,10 +124,10 @@ public class LibrarySystem {
     }
 
     public void selectBook(int index){
-
+        if(index >=0 && index < 20) currentBook = getBook(index);
     }
 
     public boolean bookSelected(){
-        return false;
+        return currentBook != null;
     }
 }
