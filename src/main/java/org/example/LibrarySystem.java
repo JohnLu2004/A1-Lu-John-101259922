@@ -160,10 +160,14 @@ public class LibrarySystem {
     }
 
     public void selectBorrowedBook(int index){
-
+        currentBook = null;
+        if(index >=0 && index < currentUser.borrowedBooks.size()) currentBook = currentUser.borrowedBooks.get(index);
     }
 
     public void returnBook(){
-
+        if(currentBook==null) return;
+        currentBook.status="AVAILABLE";
+        currentBook.borrower=null;
+        currentUser.borrowedBooks.remove(currentBook);
     }
 }
