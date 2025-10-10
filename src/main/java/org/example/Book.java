@@ -15,6 +15,8 @@ public class Book {
         this.status = "AVAILABLE";
     }
 
+    public void setStatus(String status){}
+
     public void placeHold(Borrower borrower){
         queue.add(borrower);
     }

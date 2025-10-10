@@ -1,5 +1,6 @@
 package org.example;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -105,5 +106,11 @@ public class LibrarySystem {
 
     public void logOut(){
         currentUser=null;
+    }
+
+    public ArrayList<Book> getOnHoldBooksAvailable(){
+        ArrayList<Book> dummy = new ArrayList<Book>();
+        dummy.add(new Book("Don Quixote", "Miguel de Cervantes"));
+        return dummy;
     }
 }

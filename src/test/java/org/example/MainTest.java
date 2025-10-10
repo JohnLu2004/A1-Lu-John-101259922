@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -123,6 +124,61 @@ public class MainTest {
         librarySystem.initializeLibrary();
 
         assertFalse(librarySystem.loggedIn());
+    }
+
+    @Test
+    @DisplayName("System calculates which on-hold books are available to user")
+    void RESP_05_test_01(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower1 = librarySystem.getBorrower(0);
+        Book book1 = librarySystem.getBook(0);
+        Book book2 = librarySystem.getBook(1);
+
+        borrower1.placeHold(book1);
+        borrower1.placeHold(book2);
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        ArrayList<Book> availableBooksOnHold = librarySystem.getOnHoldBooksAvailable();
+
+        assertEquals(2, availableBooksOnHold.size());
+    }
+
+    @Test
+    @DisplayName("Valid user, holds placed, but none of the books available")
+    void RESP_05_test_02(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Borrower borrower1 = librarySystem.getBorrower(0);
+        Book book1 = librarySystem.getBook(0);
+        Book book2 = librarySystem.getBook(1);
+        book1.setStatus("UNAVAILABLE");
+        book2.setStatus("UNAVAILABLE");
+
+        borrower1.placeHold(book1);
+        borrower1.placeHold(book2);
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        ArrayList<Book> availableBooksOnHold = librarySystem.getOnHoldBooksAvailable();
+
+        assertEquals(0, availableBooksOnHold.size());
+    }
+
+    @Test
+    @DisplayName("Valid user, no holds placed")
+    void RESP_05_test_03(){
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        librarySystem.authenticate("Pogchamp1234!");
+
+        ArrayList<Book> availableBooksOnHold = librarySystem.getOnHoldBooksAvailable();
+
+        assertEquals(0, availableBooksOnHold.size());
     }
 
     @Test
