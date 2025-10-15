@@ -63,4 +63,28 @@ public class AccTest {
         // --- UC-04: Logout ---
         librarySystem.logOut();
     }
+
+    @Test
+    @DisplayName("A-TEST-02: Initialization and Authentication with Error Handling")
+    void authenticationErrorHandling() {
+        //ARRANGE
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        //ACT - first user logs in, borrows book, logs out, and second user logs in
+        // --- UC-01: Login ---
+        librarySystem.authenticate("Pogchamp1234!");
+
+        //ASSERT
+        assertTrue(librarySystem.loggedIn());
+
+        // --- UC-04: Logout ---
+        librarySystem.logOut();
+
+        // --- UC-01: Login ---
+        librarySystem.authenticate("Gyatt8765!");
+
+        //ASSERT
+        assertFalse(librarySystem.loggedIn());
+    }
 }
