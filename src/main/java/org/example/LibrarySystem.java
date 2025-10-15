@@ -175,8 +175,4 @@ public class LibrarySystem {
     public HashSet<Book> getBooksOnHold() {
         return currentUser.getBooksOnHold();
     }
-
-    public HashSet<Book> getBooksOnHold(){
-        return currentUser.getBooksOnHold();
-    }
 }
