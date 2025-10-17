@@ -182,7 +182,7 @@ public class MainTest {
 
     @Test
     @DisplayName("No system prevention of 1 hold attempt on a book")
-    void RESP_06_01() {
+    void RESP_06_test_01() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -207,7 +207,7 @@ public class MainTest {
 
     @Test
     @DisplayName("System prevention of multiple holds attempts on same book")
-    void RESP_06_02() {
+    void RESP_06_test_02() {
         LibrarySystem librarySystem = new LibrarySystem();
         librarySystem.initializeLibrary();
 
@@ -549,6 +549,57 @@ public class MainTest {
 
         ArrayList<Book> borrowedBooks = librarySystem.getBorrowedBooks();
         assertEquals(0, borrowedBooks.size());
+    }
+
+    @Test
+    @DisplayName("System queues user if book already taken out")
+    void RESP_15_test_01() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Book book = librarySystem.getBook(0);
+        Borrower borrower2 = librarySystem.getBorrower(1);
+
+        // user 1 borrows the book
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+        librarySystem.logOut();
+
+        borrower2.placeHold(book);
+        book.placeHold(borrower2);
+
+        // user 1 returns the book
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBorrowedBook(0);
+        librarySystem.returnBook();
+        librarySystem.logOut();
+
+        // check if book has user 2 next in queue
+        assertEquals(borrower2, book.nextQueuedUser());
+        assertEquals(1, book.getNumHolds());
+        assertEquals(Status.ON_HOLD, book.getStatus());
+    }
+
+    @Test
+    @DisplayName("System does not queue user if book already had by user")
+    void RESP_15_test_02() {
+        LibrarySystem librarySystem = new LibrarySystem();
+        librarySystem.initializeLibrary();
+
+        Book book = librarySystem.getBook(0);
+
+        // user 1 borrows the book
+        librarySystem.authenticate("Pogchamp1234!");
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+
+        librarySystem.selectBook(0);
+        librarySystem.borrow();
+
+        // check if book has user 2 next in queue
+        assertEquals(0, book.getNumHolds());
+        assertEquals(Status.UNAVAILABLE, book.getStatus());
     }
 
     @Test
