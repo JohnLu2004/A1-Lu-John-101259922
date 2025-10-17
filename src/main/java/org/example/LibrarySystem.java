@@ -128,6 +128,8 @@ public class LibrarySystem {
             currentBook.signOutBy(currentUser, createDueDate());
             currentUser.borrowBook(currentBook);
             return true;
+        }else if(currentUser.getBorrowedBooks().contains(currentBook)){
+            return false;
         } else {
             currentUser.placeHold(currentBook);
             currentBook.placeHold(currentUser);
