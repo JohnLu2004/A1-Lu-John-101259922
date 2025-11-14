@@ -14,36 +14,33 @@ public class LibrarySystem {
 
     public void initializeBooks() {
         books.addAll(List.of(
-                new Book("Don Quixote", "Miguel de Cervantes"),
                 new Book("The Great Gatsby", "F. Scott Fitzgerald"),
-                new Book("The Catcher in the Rye", "J. D. Salinger"),
-                new Book("Moby Dick", "Herman Melville"),
-                new Book("Pride and Prejudice", "Jane Austen"),
-                new Book("Dune", "Frank Herbert"),
-                new Book("The Lord of the Rings", "J. R. R. Tolkien"),
                 new Book("To Kill a Mockingbird", "Harper Lee"),
-                new Book("The Trial", "Franz Kafka"),
-                new Book("Journey to the West", "Wu Cheng En"),
-                new Book("Adventures of Huckleberry Finn", "Mark Twain"),
+                new Book("Pride and Prejudice", "Jane Austen"),
+                new Book("The Hobbit", "J. R. R. Tolkien"),
+                new Book("Harry Potter", "J. K. Rowling"),
+                new Book("The Catcher in the Rye", "J. D. Salinger"),
+                new Book("Animal Farm", "George Orwell"),
+                new Book("Lord of the Flies", "William Golding"),
+                new Book("Jane Eyre", "Charlotte Bronte"),
+                new Book("Wuthering Heights", "Emily Bronte"),
+                new Book("Moby Dick", "Herman Melville"),
                 new Book("The Odyssey", "Homer"),
-                new Book("1984", "George Orwell"),
+                new Book("Hamlet", "William Shakespeare"),
+                new Book("War and Peace", "Leo Tolstoy"),
                 new Book("The Divine Comedy", "Dante Alighieri"),
-                new Book("The Little Prince", "Antoine de Saint-Exupéry"),
-                new Book("The Alchemist", "Paulo Coelho"),
-                new Book("Frankenstein", "Mary Shelley"),
-                new Book("Les Misérables", "Victor Hugo"),
-                new Book("Dracula", "Bram Stoker"),
-                new Book("A Christmas Carol", "Charles Dickens")));
+                new Book("Crime and Punishment", "Fyodor Dostoevsky"),
+                new Book("Don Quixote", "Miguel de Cervantes"),
+                new Book("The Iliad", "Homer"),
+                new Book("Ulysses", "James Royce")
+        ));
     }
 
     public void initializeBorrowers() {
         borrowers.addAll(List.of(
-                new Borrower("Stephen King", "Pogchamp1234!"),
-                new Borrower("Charles Darwin", "Skibidi5678!"),
-                new Borrower("William Shakespeare", "Goon4321!"),
-                new Borrower("Julius Caesar", "Brainrot8765!"),
-                new Borrower("Charles Dickens", "Rizz1010!")
-
+                new Borrower("alice", "pass123"),
+                new Borrower("bob", "pass456"),
+                new Borrower("charlie", "pass789")
         ));
     }
 
