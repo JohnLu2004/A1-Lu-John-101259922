@@ -6,8 +6,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
 
   it("should borrow a book, prevent another user from borrowing, then return it", () => {
     // User 1 logs in
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
 
     //Pick the borrow option
@@ -23,8 +23,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 2 tries to borrow the same book
-    cy.get("#username").type("Charles Darwin");
-    cy.get("#password").type("Skibidi5678!");
+    cy.get("#username").type("bob");
+    cy.get("#password").type("pass456");
     cy.get("#loginButton").click();
     cy.get("#borrowOption").click();
 
@@ -37,8 +37,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 1 returns the book
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
 
     cy.get("#returnOption").click();
@@ -49,8 +49,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // Now User 2 can borrow it
-    cy.get("#username").type("Charles Darwin");
-    cy.get("#password").type("Skibidi5678!");
+    cy.get("#username").type("bob");
+    cy.get("#password").type("pass456");
     cy.get("#loginButton").click();
 
     cy.get("#borrowOption").click();
@@ -73,8 +73,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
 
   it("should allow multiple users to place holds and notify correctly", () => {
     // User 1 borrows Book 0
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
@@ -83,8 +83,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 2 places a hold on Book 0
-    cy.get("#username").type("Charles Darwin");
-    cy.get("#password").type("Skibidi5678!");
+    cy.get("#username").type("bob");
+    cy.get("#password").type("pass456");
     cy.get("#loginButton").click();
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
@@ -93,8 +93,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 3 places a hold on Book 0
-    cy.get("#username").type("William Shakespeare");
-    cy.get("#password").type("Goon4321!");
+    cy.get("#username").type("charlie");
+    cy.get("#password").type("pass789!");
     cy.get("#loginButton").click();
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
@@ -103,8 +103,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 1 returns Book 0
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
     cy.get("#returnOption").click();
     cy.get("#bookIndex").type("0");
@@ -112,8 +112,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 2 should now be able to borrow Book 0
-    cy.get("#username").type("Charles Darwin");
-    cy.get("#password").type("Skibidi5678!");
+    cy.get("#username").type("bob");
+    cy.get("#password").type("pass456");
     cy.get("#loginButton").click();
 
     cy.get("#borrowOption").click();
@@ -123,8 +123,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User 3 still cannot borrow, must wait for notification
-    cy.get("#username").type("William Shakespeare");
-    cy.get("#password").type("Goon4321!");
+    cy.get("#username").type("charlie");
+    cy.get("#password").type("pass789!");
     cy.get("#loginButton").click();
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
@@ -135,8 +135,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
 
   it("should enforce borrowing limit and allow holds at the limit", () => {
     // User 1 borrows 3 books
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
 
     for (let i = 0; i < 3; i++) {
@@ -155,8 +155,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // User returns one book
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
     cy.get("#returnOption").click();
     cy.get("#bookIndex").type("0");
@@ -167,8 +167,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
 
     // If this user was next in queue for any held book, they could borrow now
     // (Assuming Book 3 is held for them)
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("3");
@@ -180,8 +180,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
 
   it("should handle empty borrowed book list correctly", () => {
     // User logs in without any borrowed books
-    cy.get("#username").type("Stephen King");
-    cy.get("#password").type("Pogchamp1234!");
+    cy.get("#username").type("alice");
+    cy.get("#password").type("pass123");
     cy.get("#loginButton").click();
 
     cy.get("#returnOption").click();
@@ -197,8 +197,8 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#logoutOption").click();
 
     // All books are available
-    cy.get("#username").type("Charles Darwin");
-    cy.get("#password").type("Skibidi5678!");
+    cy.get("#username").type("bob");
+    cy.get("#password").type("pass456");
     cy.get("#loginButton").click();
 
     cy.get("#borrowOption").click();

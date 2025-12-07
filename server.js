@@ -68,9 +68,9 @@ class Borrower {
    --------------------------- */
 
 const initialBorrowersData = [
-  { name: "Stephen King", password: "Pogchamp1234!" },
-  { name: "Charles Darwin", password: "Skibidi5678!" },
-  { name: "William Shakespeare", password: "Goon4321!" },
+  { name: "alice", password: "pass123" },
+  { name: "bob", password: "pass456" },
+  { name: "charlie", password: "pass789!" },
 ];
 
 const initialBooksData = [
@@ -87,7 +87,7 @@ const initialBooksData = [
   { title: "Wuthering Heights", author: "Emily Brontë" },
   { title: "Moby Dick", author: "Herman Melville" },
   { title: "The Odyssey", author: "Homer" },
-  { title: "Hamlet", author: "William Shakespeare" },
+  { title: "Hamlet", author: "charlie" },
   { title: "War and Peace", author: "Leo Tolstoy" },
   { title: "The Divine Comedy", author: "Dante Alighieri" },
   { title: "Crime and Punishment", author: "Fyodor Dostoevsky" },
@@ -97,9 +97,9 @@ const initialBooksData = [
 ];
 
 const borrowers = [
-  new Borrower("Stephen King", "Pogchamp1234!"),
-  new Borrower("Charles Darwin", "Skibidi5678!"),
-  new Borrower("William Shakespeare", "Goon4321!"),
+  new Borrower("alice", "pass123"),
+  new Borrower("bob", "pass456"),
+  new Borrower("charlie", "pass789!"),
 ];
 
 const books = [
@@ -116,7 +116,7 @@ const books = [
   new Book("Wuthering Heights", "Emily Brontë"),
   new Book("Moby Dick", "Herman Melville"),
   new Book("The Odyssey", "Homer"),
-  new Book("Hamlet", "William Shakespeare"),
+  new Book("Hamlet", "charlie"),
   new Book("War and Peace", "Leo Tolstoy"),
   new Book("The Divine Comedy", "Dante Alighieri"),
   new Book("Crime and Punishment", "Fyodor Dostoevsky"),
