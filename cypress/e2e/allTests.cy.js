@@ -17,6 +17,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
 
+    //Make sure it was successful
     cy.url().should("include", "borrow=success");
 
     // Log out
@@ -68,6 +69,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#bookIndex").type("0");
     cy.get("#returnButton").click();
 
+    // url should say return=success
     cy.url().should("include", "return=success");
   });
 
@@ -79,6 +81,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
+    // Verify successful borrow
     cy.url().should("include", "borrow=success");
     cy.get("#logoutOption").click();
 
@@ -89,6 +92,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
+    // Verify hold placed
     cy.url().should("include", "hold=placed");
     cy.get("#logoutOption").click();
 
@@ -99,6 +103,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
+    // Verify hold placed
     cy.url().should("include", "hold=placed");
     cy.get("#logoutOption").click();
 
@@ -119,6 +124,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
+    // Verify successful borrow
     cy.url().should("include", "borrow=success");
     cy.get("#logoutOption").click();
 
@@ -129,6 +135,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
+    // Verify hold still in place
     cy.url().should("include", "hold=placed");
     cy.get("#logoutOption").click();
   });
@@ -143,6 +150,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
       cy.get("#borrowOption").click();
       cy.get("#bookIndex").type(`${i}`);
       cy.get("#borrowButton").click();
+      // Verify successful borrow
       cy.url().should("include", "borrow=success");
     }
 
@@ -150,6 +158,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("3");
     cy.get("#borrowButton").click();
+    // Verify hold placed since at limit
     cy.url().should("include", "hold=placed");
 
     cy.get("#logoutOption").click();
@@ -161,6 +170,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#returnOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#returnButton").click();
+    // Verify successful return
     cy.url().should("include", "return=success");
 
     cy.get("#logoutOption").click();
@@ -173,6 +183,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("3");
     cy.get("#borrowButton").click();
+    // Verify successful borrow
     cy.url().should("include", "borrow=success");
 
     cy.get("#logoutOption").click();
@@ -204,6 +215,7 @@ describe("A1 Scenario - Borrow & Return Cycle", () => {
     cy.get("#borrowOption").click();
     cy.get("#bookIndex").type("0");
     cy.get("#borrowButton").click();
+    // Verify successful borrow
     cy.url().should("include", "borrow=success");
   });
 });
