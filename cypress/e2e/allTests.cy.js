@@ -4,6 +4,10 @@ describe("Library System Web Tests", () => {
     cy.visit("http://localhost:3000/index.html");
   });
 
+  afterEach(() => {
+    cy.request("POST", "http://localhost:3000/api/reset");
+  });
+
   it("should borrow a book, prevent another user from borrowing, then return it", () => {
     // User 1 logs in
     cy.get("#username").type("alice");
