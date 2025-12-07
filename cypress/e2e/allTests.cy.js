@@ -1,4 +1,4 @@
-describe("A1 Scenario - Borrow & Return Cycle", () => {
+describe("Library System Web Tests", () => {
   beforeEach(() => {
     cy.request("POST", "http://localhost:3000/api/reset");
     cy.visit("http://localhost:3000/index.html");
