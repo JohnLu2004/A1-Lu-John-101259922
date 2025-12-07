@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Borrow a Book</h1>
+
+    <div id="books"></div>
+
+    <form action="/borrow" method="POST">
+      <label>Book Index:</label>
+      <input id="bookIndex" name="index" /><br /><br />
+      <button id="borrowButton" type="submit">Borrow</button>
+    </form>
+
+    <script>
+      fetch("/books")
+        .then((r) => r.json())
+        .then((data) => {
+          let html = "<ul>";
+          data.forEach((b, i) => {
+            html += `<li>${i}) ${b.title} by ${b.author} — ${b.status} ${
+              b.dueDate ? "Due: " + b.dueDate : ""
+            }</li>`;
+          });
+          html += "</ul>";
+          document.getElementById("books").innerHTML = html;
+        });
+    </script>
+  </body>
+</html>
